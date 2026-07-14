@@ -1,0 +1,91 @@
+/* Container Dark Section Backgrounds */
+:root {
+  /* Brand Colors */
+  --color-primary:  #1a4fcc; /* Deep blue used in headers, buttons */
+  --color-accent: #3abf8c;  /* Light teal/green from 'one tap away' */
+  --color-text-dark: #1e293b;
+  --color-text-muted: #64748b;
+  --color-bg-light: #f8fafc;
+  --color-bg-dark-section: #0a1128; /* Footer background */
+
+  /* Component Colors (Dropdown) */
+  --color-dropdown-bg: #e5effd;
+  --color-dropdown-text: #1a4fcc;
+  --color-icon-login: #ff8e1a; /* Orange for 'Log in' icon */
+  --color-icon-signup: #56d3a8; /* Teal for 'Sign up' icon */
+  
+  /* Typography */
+  --font-family-base: 'Inter', sans-serif;
+}
+.rating-section {
+  background-color: #151e3d !important;
+  color: #fff;
+  min-height: 90px; /* FIXED: Prevents overflowing clips on small views */
+  display: flex;
+  align-items: center;
+}
+
+.footer {
+  background-color: var(--color-bg-dark-section, #0b132b);
+  color: #fff;
+}
+
+/* --- Stats Formatting Block --- */
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* FIXED: Changed to desktop-only translation adjustments to prevent layout broken stacking loops on mobile screens */
+@media (min-width: 768px) {
+  .rows {
+    transform: translateY(-20%);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .rows {
+    transform: translateY(0); /* Keeps stats beautifully centered grid aligned inside the mobile strip container box */
+    padding: 10px 0;
+  }
+  .stat-value {
+    font-size: 1.4rem; /* Safe sizing configurations for compact mobile columns splits */
+  }
+}
+
+.stat-value.rating {
+  color: #f1c40f;
+}
+
+.stat-label.text-light-muted,
+.community-text,
+.copyright-text,
+.footer-links a {
+  font-size: 0.85rem;
+  color: #e2e8f0 !important; 
+  text-decoration: none;
+}
+
+/* --- Full-Width Edge-To-Edge Line --- */
+.footer-border-line {
+  width: 100%;
+  height: 1px;
+  background-color: #1e293b;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Interactive Navigation Adjustments --- */
+.footer-links a:hover {
+  color: #fff !important;
+  text-decoration: underline;
+}
+
+/* Mobile Alignment Optimization */
+@media (max-width: 767.98px) {
+  .copyright-text, .community-text, .footer-links {
+    text-align: center !important;
+    margin-bottom: 8px;
+  }
+}

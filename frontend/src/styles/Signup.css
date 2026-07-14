@@ -1,0 +1,188 @@
+:root {
+  /* Brand Colors */
+  --color-primary:  #1a4fcc; /* Deep blue used in headers, buttons */
+  --color-accent: #3abf8c;  /* Light teal/green from 'one tap away' */
+  --color-text-dark: #1e293b;
+  --color-text-muted: #64748b;
+  --color-bg-light: #f8fafc;
+  --color-bg-dark-section: #0a1128; /* Footer background */
+
+  /* Component Colors (Dropdown) */
+  --color-dropdown-bg: #e5effd;
+  --color-dropdown-text: #1a4fcc;
+  --color-icon-login: #ff8e1a; /* Orange for 'Log in' icon */
+  --color-icon-signup: #56d3a8; /* Teal for 'Sign up' icon */
+  
+  /* Typography */
+  --font-family-base: 'Inter', sans-serif;
+}
+.signup-screen {
+  min-height: 100vh;
+  background: #eef3f9;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 48px 24px;
+  color: #172b52;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+.signup-panel {
+  width: min(100%, 820px);
+}
+
+.signup-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 56px;
+  font-size: 36px;
+  line-height: 1;
+  font-weight: 800;
+  color: #172b52;
+}
+
+.signup-logo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.signup-heading {
+  margin-bottom: 42px;
+}
+
+.signup-heading p {
+  margin: 0 0 6px;
+  color: #7f98bd;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 6px;
+}
+
+.signup-heading h1 {
+  margin: 0 0 12px;
+  color: #172b52;
+  font-size: clamp(34px, 5vw, 56px);
+  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.signup-heading span {
+  color: #7790b6;
+  font-size: clamp(18px, 2.2vw, 25px);
+  font-weight: 400;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.signup-field label {
+  display: block;
+  margin-bottom: 8px;
+  color: #7892b8;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.signup-field input {
+  width: 100%;
+  height: 72px;
+  border: 2px solid #d9e4f3;
+  border-radius: 14px;
+  background: #ffffff;
+  padding: 0 28px;
+  color: #172b52;
+  font-size: 20px;
+  font-weight: 500;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.signup-field input::placeholder {
+  color: #9db2d2;
+}
+
+.signup-field input:focus {
+  border-color: #2363cf;
+  box-shadow: 0 0 0 4px rgba(35, 99, 207, 0.12);
+}
+
+.signup-submit {
+  width: 100%;
+  height: 76px;
+  margin-top: 14px;
+  border: 0;
+  border-radius: 14px;
+  background: #235ecb;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 800;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.signup-submit:hover {
+  background: #1d55bd;
+}
+
+.signup-submit:active {
+  transform: translateY(1px);
+}
+
+.signup-footer-text {
+  margin: 12px 0 0;
+  text-align: center;
+  color: #7892b8;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.signup-footer-text button {
+  border: 0;
+  background: transparent;
+  color: #235ecb;
+  font: inherit;
+  font-weight: 800;
+  padding: 0;
+}
+
+@media (max-width: 768px) {
+  .signup-screen {
+    padding: 32px 18px;
+  }
+
+  .signup-brand {
+    margin-bottom: 40px;
+    font-size: 30px;
+  }
+
+  .signup-heading {
+    margin-bottom: 32px;
+  }
+
+  .signup-heading p {
+    font-size: 14px;
+    letter-spacing: 4px;
+  }
+
+  .signup-field input {
+    height: 62px;
+    font-size: 17px;
+    padding: 0 20px;
+  }
+
+  .signup-submit {
+    height: 66px;
+    font-size: 20px;
+  }
+
+  .signup-footer-text {
+    font-size: 17px;
+  }
+}

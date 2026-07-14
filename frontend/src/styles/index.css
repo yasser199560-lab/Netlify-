@@ -1,0 +1,1133 @@
+/* =============================================================
+   Talabaty — merged global stylesheet.
+   Section 1: original brand tokens + utility classes (dashboards,
+   store pages, customer account pages) — unchanged from the base app.
+   Section 2: newer marketing-site / admin-panel styles layered on top.
+   Both sections are additive — no selector collisions between them.
+   ============================================================= */
+
+/* ---------- Section 1: base design system ---------- */
+/* Bootstrap 5 provides layout/utilities/components. This file only adds
+   Talabaty's brand palette on top of Bootstrap, as plain CSS custom
+   properties + a small set of helper classes (no Tailwind involved). */
+
+:root {
+  --brand-50: #eef2fe;
+  --brand-100: #dbe3fd;
+  --brand-400: #5b7cf0;
+  --brand-500: #3860ea;
+  --brand-600: #2748d6;
+  --brand-700: #1f39ab;
+
+  --navy-900: #0d1830;
+  --navy-800: #132449;
+  --navy-700: #1a2f5c;
+
+  --teal-50: #e7faf4;
+  --teal-100: #d1f5e8;
+  --teal-300: #6ee7c8;
+  --teal-500: #22b992;
+  --teal-600: #189476;
+  --teal-700: #127a61;
+
+  --amber-50: #fff8eb;
+  --amber-100: #fef0cd;
+  --amber-300: #fcd34d;
+  --amber-400: #fbbf24;
+  --amber-500: #f59e0b;
+  --amber-600: #b45309;
+  --amber-700: #92400e;
+
+  --indigo-50: #eef0ff;
+  --indigo-600: #4f46e5;
+
+  --pink-50: #fdf1f6;
+  --pink-600: #db2777;
+
+  --red-50: #fef2f2;
+  --red-100: #fee2e2;
+  --red-500: #ef4444;
+  --red-600: #dc2626;
+  --red-700: #b91c1c;
+
+  --blue-50: #eff6ff;
+  --blue-700: #1d4ed8;
+
+  --slate-50: #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-400: #94a3b8;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+
+  --surface: #eef1f7;
+
+  /* Re-point Bootstrap's own theme variables at the brand palette so
+     native Bootstrap components (btn-primary, links, focus rings...)
+     automatically match the Talabaty look. */
+  --bs-primary: var(--brand-600);
+  --bs-primary-rgb: 39, 72, 214;
+  --bs-link-color: var(--brand-600);
+  --bs-link-hover-color: var(--brand-700);
+  --bs-body-font-family: "Inter", system-ui, sans-serif;
+}
+
+body {
+  background: var(--surface);
+  color: var(--navy-900);
+}
+
+a {
+  text-decoration: none;
+}
+
+/* ---- brand shape helpers (kept from the mockups) ---- */
+.rounded-xl2 { border-radius: 1rem !important; }
+.shadow-card { box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.08) !important; }
+.bg-surface { background: var(--surface) !important; }
+
+/* ---- background tints ---- */
+.bg-brand-50 { background: var(--brand-50) !important; }
+.bg-brand-100 { background: var(--brand-100) !important; }
+.bg-brand-600 { background: var(--brand-600) !important; }
+.bg-brand-700 { background: var(--brand-700) !important; }
+.bg-teal-50 { background: var(--teal-50) !important; }
+.bg-teal-100 { background: var(--teal-100) !important; }
+.bg-amber-50 { background: var(--amber-50) !important; }
+.bg-amber-100 { background: var(--amber-100) !important; }
+.bg-indigo-50 { background: var(--indigo-50) !important; }
+.bg-pink-50 { background: var(--pink-50) !important; }
+.bg-red-50 { background: var(--red-50) !important; }
+.bg-red-100 { background: var(--red-100) !important; }
+.bg-blue-50 { background: var(--blue-50) !important; }
+.bg-slate-50 { background: var(--slate-50) !important; }
+.bg-slate-100 { background: var(--slate-100) !important; }
+.bg-navy-700 { background: var(--navy-700) !important; }
+.bg-navy-800 { background: var(--navy-800) !important; }
+.bg-navy-900 { background: var(--navy-900) !important; }
+.bg-white-10 { background: rgba(255, 255, 255, 0.12) !important; }
+
+/* ---- text colors ---- */
+.text-brand-100 { color: var(--brand-100) !important; }
+.text-brand-300 { color: var(--brand-400) !important; }
+.text-brand-400 { color: var(--brand-400) !important; }
+.text-brand-500 { color: var(--brand-500) !important; }
+.text-brand-600 { color: var(--brand-600) !important; }
+.text-brand-700 { color: var(--brand-700) !important; }
+.text-navy-900 { color: var(--navy-900) !important; }
+.text-teal-300 { color: var(--teal-300) !important; }
+.text-teal-500 { color: var(--teal-500) !important; }
+.text-teal-600 { color: var(--teal-600) !important; }
+.text-teal-700 { color: var(--teal-700) !important; }
+.text-amber-300 { color: var(--amber-300) !important; }
+.text-amber-400 { color: var(--amber-400) !important; }
+.text-amber-500 { color: var(--amber-500) !important; }
+.text-amber-600 { color: var(--amber-600) !important; }
+.text-amber-700 { color: var(--amber-700) !important; }
+.text-indigo-600 { color: var(--indigo-600) !important; }
+.text-pink-600 { color: var(--pink-600) !important; }
+.text-red-500 { color: var(--red-500) !important; }
+.text-red-600 { color: var(--red-600) !important; }
+.text-red-700 { color: var(--red-700) !important; }
+.text-blue-700 { color: var(--blue-700) !important; }
+.text-slate-300 { color: var(--slate-300) !important; }
+.text-slate-400 { color: var(--slate-400) !important; }
+.text-slate-500 { color: var(--slate-500) !important; }
+.text-slate-600 { color: var(--slate-600) !important; }
+
+/* ---- borders ---- */
+.border-brand-500 { border-color: var(--brand-500) !important; }
+.border-brand-600 { border-color: var(--brand-600) !important; }
+.border-navy-700 { border-color: var(--navy-700) !important; }
+.border-navy-900 { border-color: var(--navy-900) !important; }
+.border-slate-100 { border-color: var(--slate-100) !important; }
+.border-slate-200 { border-color: var(--slate-200) !important; }
+.border-slate-300 { border-color: var(--slate-300) !important; }
+
+/* ---- hover helpers (Bootstrap has no hover: variants like Tailwind) ---- */
+.hover-bg-brand-50:hover { background: var(--brand-50) !important; }
+.hover-bg-brand-100:hover { background: var(--brand-100) !important; }
+.hover-bg-brand-700:hover { background: var(--brand-700) !important; }
+.hover-bg-amber-100:hover { background: var(--amber-100) !important; }
+.hover-bg-teal-100:hover { background: var(--teal-100) !important; }
+.hover-bg-red-100:hover { background: var(--red-100) !important; }
+.hover-bg-navy-700:hover { background: var(--navy-700) !important; }
+.hover-bg-slate-50:hover { background: var(--slate-50) !important; }
+.hover-bg-white-10:hover { background: rgba(255, 255, 255, 0.12) !important; }
+.hover-text-white:hover { color: #fff !important; }
+.hover-text-navy-900:hover { color: var(--navy-900) !important; }
+.hover-border-slate-300:hover { border-color: var(--slate-300) !important; }
+.hover-lift:hover { transform: translateY(-2px); }
+
+/* ---- form control focus ring matching the brand ---- */
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 0.2rem var(--brand-100);
+}
+
+/* Buttons that use the brand color explicitly (kept distinct from
+   Bootstrap's own .btn-primary so pages can opt into either). */
+.btn-brand {
+  background-color: var(--brand-600);
+  border-color: var(--brand-600);
+  color: #fff;
+}
+.btn-brand:hover {
+  background-color: var(--brand-700);
+  border-color: var(--brand-700);
+  color: #fff;
+}
+.btn-outline-brand {
+  border-color: var(--brand-600);
+  color: var(--brand-600);
+}
+.btn-outline-brand:hover {
+  background-color: var(--brand-50);
+  color: var(--brand-600);
+}
+
+.card-hover { transition: box-shadow .15s ease, transform .15s ease; }
+.card-hover:hover { box-shadow: 0 4px 14px rgba(15, 23, 42, 0.12); transform: translateY(-2px); }
+
+.small-caps { text-transform: uppercase; letter-spacing: .04em; }
+
+
+/* ---------- Section 2: homepage, header/footer, admin & partner styles ---------- */
+
+
+
+:root {
+  /* Brand Colors */
+  --color-primary:  #1a4fcc; /* Deep blue used in headers, buttons */
+  --color-accent: #3abf8c;  /* Light teal/green from 'one tap away' */
+  --color-text-dark: #1e293b;
+  --color-text-muted: #64748b;
+  --color-bg-light: #f8fafc;
+  --color-bg-dark-section: #0a1128; /* Footer background */
+
+  /* Component Colors (Dropdown) */
+  --color-dropdown-bg: #e5effd;
+  --color-dropdown-text: #1a4fcc;
+  --color-icon-login: #ff8e1a; /* Orange for 'Log in' icon */
+  --color-icon-signup: #56d3a8; /* Teal for 'Sign up' icon */
+  
+  /* Typography */
+  --font-family-base: 'Inter', sans-serif;
+}
+/* =====================================================
+   PARTNER DASHBOARD LAYOUT
+===================================================== */
+
+.dashboard-wrapper{
+    display:flex;
+    min-height:100vh;
+    background:#f4f7fc;
+}
+
+/* ===========================
+SIDEBAR
+=========================== */
+
+.partner-sidebar{
+    width:270px;
+    background:#19345D;
+    color:#fff;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    transition:.3s;
+    position:fixed;
+    left:0;
+    top:0;
+    height:100vh;
+    z-index:1050;
+    box-shadow:5px 0 20px rgba(0,0,0,.08);
+}
+
+/* Logo */
+
+.sidebar-logo{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:30px 25px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.logo-circle{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:#2F67F6;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.sidebar-logo h4{
+    margin:0;
+    font-weight:700;
+}
+
+.sidebar-logo span{
+    color:#BFCBE3;
+    font-size:14px;
+}
+
+/* ===========================
+NAVIGATION
+=========================== */
+
+.sidebar-nav{
+    display:flex;
+    flex-direction:column;
+    padding:25px 15px;
+    gap:10px;
+}
+
+.sidebar-link{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    color:#fff;
+    text-decoration:none;
+    padding:14px 18px;
+    border-radius:14px;
+    transition:.3s;
+    font-weight:500;
+    font-size:15px;
+}
+
+.sidebar-link svg{
+    font-size:22px;
+}
+
+.sidebar-link:hover{
+    background:#2F67F6;
+    color:#fff;
+}
+
+.sidebar-link.active{
+    background:#2F67F6;
+}
+
+/* ===========================
+FOOTER
+=========================== */
+
+.sidebar-footer{
+    padding:25px;
+    border-top:1px solid rgba(255,255,255,.08);
+}
+
+.restaurant-info{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.restaurant-avatar{
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:#2F67F6;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
+    font-size:20px;
+}
+
+.restaurant-info h6{
+    color:white;
+}
+
+.restaurant-info small{
+    color:#c9d4ea;
+}
+
+.logout-button{
+    border-radius:12px;
+}
+
+/* ===========================
+MAIN
+=========================== */
+
+.dashboard-main{
+    margin-left:270px;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+}
+
+/* ===========================
+HEADER
+=========================== */
+
+.dashboard-header{
+    background:white;
+    padding:20px 35px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    box-shadow:0 3px 15px rgba(0,0,0,.05);
+}
+
+.page-title{
+    margin:0;
+    color:#19345D;
+    font-weight:700;
+}
+
+.page-subtitle{
+    margin:0;
+    color:#8A94A6;
+    font-size:14px;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.notification-button{
+    width:48px;
+    height:48px;
+    border:none;
+    border-radius:50%;
+    background:#EEF4FF;
+    color:#2F67F6;
+    font-size:22px;
+    transition:.3s;
+}
+
+.notification-button:hover{
+    background:#2F67F6;
+    color:white;
+}
+
+.partner-profile{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.partner-avatar{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:#2F67F6;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
+    font-size:18px;
+}
+
+.partner-profile h6{
+    margin:0;
+    color:#19345D;
+}
+
+.partner-profile small{
+    color:#8A94A6;
+}
+
+/* ===========================
+CONTENT
+=========================== */
+
+.dashboard-content{
+    padding:35px;
+}
+
+/* ===========================
+MENU BUTTON
+=========================== */
+
+.menu-button{
+    display:none;
+    width:45px;
+    height:45px;
+    border:none;
+    border-radius:10px;
+    background:#2F67F6;
+    color:white;
+    margin-right:20px;
+    font-size:22px;
+}
+
+/* ===========================
+OVERLAY
+=========================== */
+
+.sidebar-overlay{
+    display:none;
+}
+
+/* ===========================
+RESPONSIVE
+=========================== */
+
+@media(max-width:992px){
+
+.partner-sidebar{
+    transform:translateX(-100%);
+}
+
+.partner-sidebar.sidebar-open{
+    transform:translateX(0);
+}
+
+.dashboard-main{
+    margin-left:0;
+}
+
+.menu-button{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.sidebar-overlay{
+    display:block;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    opacity:0;
+    visibility:hidden;
+    transition:.3s;
+    z-index:1040;
+}
+
+.show-overlay{
+    opacity:1;
+    visibility:visible;
+}
+
+.dashboard-header{
+    padding:18px;
+}
+
+.dashboard-content{
+    padding:20px;
+}
+
+}
+
+@media(max-width:576px){
+
+.partner-profile div:last-child{
+    display:none;
+}
+
+.page-subtitle{
+    display:none;
+}
+
+.dashboard-content{
+    padding:15px;
+}
+
+.sidebar-logo{
+    padding:20px;
+}
+
+}
+
+/* ===========================
+DASHBOARD MODERN UI
+=========================== */
+
+.dashboard-page{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+/* Welcome section */
+.dashboard-welcome h2{
+    font-size:26px;
+    font-weight:700;
+    color:#19345D;
+    margin:0;
+}
+
+.dashboard-welcome p{
+    color:#8A94A6;
+    margin-top:5px;
+}
+
+/* Modern card */
+.modern-card{
+    background:#fff;
+    border-radius:16px;
+    box-shadow:0 5px 20px rgba(0,0,0,.06);
+    overflow:hidden;
+}
+
+/* Header */
+.card-header-modern{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 22px;
+    border-bottom:1px solid #f0f2f7;
+}
+
+.card-header-modern h5{
+    margin:0;
+    font-weight:600;
+    color:#19345D;
+}
+
+.card-header-modern span{
+    font-size:13px;
+    color:#8A94A6;
+}
+
+/* Table */
+.modern-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.modern-table th{
+    text-align:left;
+    padding:15px 20px;
+    font-size:13px;
+    color:#8A94A6;
+    font-weight:600;
+    background:#fafbff;
+}
+
+.modern-table td{
+    padding:16px 20px;
+    border-top:1px solid #f3f4f8;
+    color:#19345D;
+    font-weight:500;
+}
+
+.modern-table tr:hover{
+    background:#f7faff;
+}
+
+/* Status badges */
+.status-badge{
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+}
+
+.status-badge.completed{
+    background:#e8f9f0;
+    color:#27AE60;
+}
+
+.status-badge.pending{
+    background:#fff4e6;
+    color:#F2994A;
+}
+
+.status-badge.preparing{
+    background:#eaf2ff;
+    color:#2F80ED;
+}
+
+.logo-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* optional improvement */
+.logo-circle{
+    overflow: hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+
+/* =========================
+MY ITEMS PAGE (MODERN UI)
+========================= */
+
+.myitems-page{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+/* HEADER */
+.myitems-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.myitems-header h2{
+    margin:0;
+    font-size:26px;
+    font-weight:700;
+    color:#19345D;
+}
+
+.myitems-header p{
+    margin:5px 0 0 0;
+    color:#8A94A6;
+}
+
+.add-btn{
+    background:#2F67F6;
+    color:white;
+    border:none;
+    padding:12px 18px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.add-btn:hover{
+    background:#1f54d6;
+    transform:translateY(-2px);
+}
+
+/* STATS */
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.stat-card{
+    background:#fff;
+    padding:20px;
+    border-radius:16px;
+    box-shadow:0 5px 18px rgba(0,0,0,.06);
+    transition:.3s;
+}
+
+.stat-card:hover{
+    transform:translateY(-4px);
+}
+
+.stat-card h3{
+    margin:0;
+    font-size:22px;
+    color:#19345D;
+}
+
+.stat-card p{
+    margin:5px 0 0 0;
+    color:#8A94A6;
+}
+
+/* UPLOAD CARD */
+.upload-card{
+    background:#fff;
+    padding:25px;
+    border-radius:16px;
+    box-shadow:0 5px 18px rgba(0,0,0,.06);
+}
+
+.upload-card h3{
+    margin-bottom:15px;
+    color:#19345D;
+}
+
+.upload-form{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+/* IMAGE UPLOAD */
+.image-upload{
+    border:2px dashed #cfd8ea;
+    padding:20px;
+    border-radius:14px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+    color:#8A94A6;
+}
+
+.image-upload input{
+    width:100%;
+    margin-top:10px;
+    padding:10px;
+    border-radius:10px;
+    border:1px solid #ddd;
+}
+
+/* FORM GRID */
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+}
+
+.form-grid input,
+textarea{
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #ddd;
+    outline:none;
+}
+
+textarea{
+    min-height:80px;
+    resize:none;
+}
+
+/* SAVE BUTTON */
+.save-btn{
+    background:#27AE60;
+    color:white;
+    border:none;
+    padding:12px;
+    border-radius:12px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.save-btn:hover{
+    background:#1f8d4d;
+}
+
+/* SEARCH */
+.search-bar{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:#fff;
+    padding:12px 15px;
+    border-radius:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,.05);
+}
+
+.search-bar input{
+    border:none;
+    outline:none;
+    width:100%;
+}
+
+/* PRODUCTS GRID */
+.products-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+/* PRODUCT CARD */
+.product-card{
+    background:#fff;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 5px 18px rgba(0,0,0,.06);
+    transition:.3s;
+}
+
+.product-card:hover{
+    transform:translateY(-5px);
+}
+
+.product-card img{
+    width:100%;
+    height:160px;
+    object-fit:cover;
+}
+
+.product-info{
+    padding:15px;
+}
+
+.product-info h4{
+    margin:0;
+    color:#19345D;
+}
+
+.product-info p{
+    color:#8A94A6;
+    font-size:13px;
+}
+
+.product-footer{
+    display:flex;
+    justify-content:space-between;
+    margin-top:10px;
+}
+
+.price{
+    font-weight:700;
+    color:#27AE60;
+}
+
+.status{
+    font-size:12px;
+    background:#eaf6ef;
+    color:#27AE60;
+    padding:4px 10px;
+    border-radius:20px;
+}
+
+/* ACTIONS */
+.actions{
+    display:flex;
+    gap:10px;
+    margin-top:12px;
+}
+
+.actions button{
+    flex:1;
+    border:none;
+    padding:8px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:13px;
+}
+
+.edit{
+    background:#EEF4FF;
+    color:#2F67F6;
+}
+
+.delete{
+    background:#ffecec;
+    color:#e74c3c;
+}
+
+/* RESPONSIVE */
+@media(max-width:992px){
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .products-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:600px){
+    .products-grid{
+        grid-template-columns:1fr;
+    }
+
+    .myitems-header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:10px;
+    }
+}
+
+
+
+/* =========================
+ORDERS PAGE
+========================= */
+
+.orders-page{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+/* HEADER */
+.page-header h2{
+    margin:0;
+    font-size:26px;
+    color:#19345D;
+}
+
+.page-header p{
+    color:#8A94A6;
+    margin-top:5px;
+}
+
+/* STATS */
+.orders-stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.orders-stats .stat{
+    background:#fff;
+    padding:18px;
+    border-radius:16px;
+    box-shadow:0 5px 15px rgba(0,0,0,.06);
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.orders-stats svg{
+    font-size:22px;
+    color:#2F67F6;
+}
+
+/* FILTERS */
+.orders-filters{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.search-box{
+    flex:1;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:#fff;
+    padding:10px 15px;
+    border-radius:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,.05);
+}
+
+.search-box input{
+    border:none;
+    outline:none;
+    width:100%;
+}
+
+.orders-filters select{
+    padding:10px;
+    border-radius:10px;
+    border:1px solid #ddd;
+}
+
+/* ORDER GRID */
+.orders-list{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+/* ORDER CARD */
+.order-card{
+    background:#fff;
+    padding:15px;
+    border-radius:16px;
+    box-shadow:0 5px 18px rgba(0,0,0,.06);
+    transition:.3s;
+}
+
+.order-card:hover{
+    transform:translateY(-4px);
+}
+
+.order-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.order-body p{
+    margin:5px 0;
+    color:#19345D;
+    font-size:14px;
+}
+
+.time{
+    color:#8A94A6;
+    font-size:12px;
+}
+
+/* STATUS */
+.status-pending{
+    background:#fff4e6;
+    color:#F2994A;
+    padding:4px 10px;
+    border-radius:20px;
+    font-size:12px;
+}
+
+.status-preparing{
+    background:#eaf2ff;
+    color:#2F67F6;
+    padding:4px 10px;
+    border-radius:20px;
+    font-size:12px;
+}
+
+.status-delivered{
+    background:#e8f9f0;
+    color:#27AE60;
+    padding:4px 10px;
+    border-radius:20px;
+    font-size:12px;
+}
+
+.status-cancelled{
+    background:#ffecec;
+    color:#e74c3c;
+    padding:4px 10px;
+    border-radius:20px;
+    font-size:12px;
+}
+
+/* ACTIONS */
+.order-actions{
+    display:flex;
+    gap:10px;
+    margin-top:10px;
+}
+
+.order-actions button{
+    flex:1;
+    padding:8px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.view{
+    background:#EEF4FF;
+    color:#2F67F6;
+}
+
+.update{
+    background:#27AE60;
+    color:white;
+}
+
+/* RESPONSIVE */
+@media(max-width:992px){
+    .orders-stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .orders-list{
+        grid-template-columns:1fr;
+    }
+
+    .orders-filters{
+        flex-direction:column;
+    }
+}
+
+.order-actions button:disabled{
+    opacity:0.6;
+    cursor:not-allowed;
+}

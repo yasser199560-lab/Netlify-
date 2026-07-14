@@ -1,0 +1,84 @@
+/* Minimal overrides — Bootstrap handles layout/spacing/tables/badges/buttons */
+
+.admin-dashboard-wrapper {
+  min-height: 100vh;
+  background-color: #eef1f6;
+}
+
+.admin-sidebar {
+  width: 260px;
+  min-width: 260px;
+  background-color: #0f1b3d;
+}
+
+.nav-item-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 0.95rem;
+}
+
+.nav-item-btn:hover {
+  background-color: #1a2a52;
+  color: #ffffff !important;
+}
+
+.active-nav-item {
+  background-color: #3b6ef6 !important;
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+.admin-main-content {
+  min-height: 100vh;
+}
+
+.card {
+  border-radius: 14px;
+}
+
+.table thead th {
+  border-bottom: 1px solid #eef1f6;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* ---- Responsive: collapse the fixed sidebar into a horizontal top bar
+   on tablets/phones so the dashboard never overflows or gets cramped. ---- */
+@media (max-width: 991.98px) {
+  .admin-dashboard-wrapper {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+    min-width: 100%;
+    min-height: auto;
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0.75rem 1rem !important;
+  }
+
+  .admin-sidebar .nav.flex-column {
+    flex-direction: row !important;
+    flex-wrap: wrap;
+    flex-grow: 0 !important;
+    gap: 0.5rem !important;
+  }
+
+  .admin-sidebar .px-2.pb-4 {
+    padding-bottom: 0.5rem !important;
+    width: 100%;
+  }
+
+  .admin-main-content {
+    min-height: auto;
+    padding: 1.25rem !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .admin-main-content {
+    padding: 0.85rem !important;
+  }
+}

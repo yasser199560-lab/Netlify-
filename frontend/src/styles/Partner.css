@@ -1,0 +1,156 @@
+/* Color Palette Variables specific to this component matching Image 2 */
+:root {
+  /* Brand Colors */
+  --color-primary:  #1a4fcc; /* Deep blue used in headers, buttons */
+  --color-accent: #3abf8c;  /* Light teal/green from 'one tap away' */
+  --color-text-dark: #1e293b;
+  --color-text-muted: #64748b;
+  --color-bg-light: #f8fafc;
+  --color-bg-dark-section: #0a1128; /* Footer background */
+
+  /* Component Colors (Dropdown) */
+  --color-dropdown-bg: #e5effd;
+  --color-dropdown-text: #1a4fcc;
+  --color-icon-login: #ff8e1a; /* Orange for 'Log in' icon */
+  --color-icon-signup: #56d3a8; /* Teal for 'Sign up' icon */
+  
+  /* Typography */
+  --font-family-base: 'Inter', sans-serif;
+}
+.partner-section {
+  --brand-blue: #1234a6;
+  --form-bg: #f8fafc;
+  --input-border: #e2e8f0;
+  --mint-green: #22c55e;
+  --mint-bg: #dcfce7;
+  
+  /* Limits total section width on massive desktop monitors to keep things centered but stretched wide */
+  max-width: 1400px;
+  margin: 0 auto; 
+}
+
+.custom-form-card {
+  background-color: var(--form-bg);
+  border-color: #f1f5f9 !important;
+  /* Ensures the card maintains a clean structure layout while sitting completely to the right side */
+  max-width: 580px; 
+  margin-left: auto; 
+}
+.custom-form-card:hover{
+    transition: transform 0.2s ease;
+  box-shadow: 0 1px 8px var(--color-primary)!important;
+}
+.text-brand-blue {
+  color: var(--brand-blue) !important;
+}
+
+/* Custom form container card override style rules */
+.custom-form-card {
+  background-color: var(--form-bg);
+  border-color: #f1f5f9 !important;
+}
+
+/* Labels custom formatting rules matching target design typography */
+.form-label-custom {
+  font-size: 0.72rem;
+  column-gap: 2px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #64748b;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* Refined Form Input Elements Styling */
+.custom-input {
+  border: 1px solid var(--input-border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.92rem;
+  background-color: #ffffff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.custom-input:focus {
+  border-color: var(--brand-blue);
+  box-shadow: 0 0 0 3px rgba(18, 52, 166, 0.1);
+}
+
+/* Clean Custom Muted Mint Checkmark Implementation */
+.check-icon-wrapper {
+  background-color: var(--mint-bg);
+  color: var(--mint-green);
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  font-weight: bold;
+}
+
+/* Primary Action Button Custom Color Overrides */
+.btn-partner-submit {
+  background-color: var(--brand-blue) !important;
+  border-color: var(--brand-blue) !important;
+  color: #ffffff !important;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 0.95rem;
+  transition: background-color 0.2s;
+}
+
+.btn-partner-submit:hover {
+  background-color: #0e2985 !important;
+  border-color: #0e2985 !important;
+}
+
+.checklist-container li {
+  font-size: 0.95rem;
+  color: #334155;
+  font-weight: 500;
+}
+/* Animation helper for the appearing custom text field input */
+.animate-fade-in {
+  animation: fadeInField 0.3s ease-out forwards;
+}
+
+@keyframes fadeInField {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.partner-section {
+  max-width: 1550px; /* Aligns with your expanded category section boundary width */
+  margin: 0 auto; 
+  width: 100%;
+  height:100%!important;
+}
+
+.custom-form-card {
+  background-color: var(--form-bg, #f8fafc);
+  border-color: #f1f5f9 !important;
+  width: 100%;
+  max-width: 580px; 
+  /* CHANGED: Converted to responsive auto-margins so it hits the right edge on desktop but centers on mobile viewport columns */
+  margin-left: auto; 
+  margin-right: 0;
+}
+
+@media (max-width: 991.98px) {
+  .custom-form-card {
+    margin-right: auto; /* Centers the card completely when column sections break and stack vertically on mobile tabs */
+    max-width: 100%;
+  }
+  
+  .partner-section {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}

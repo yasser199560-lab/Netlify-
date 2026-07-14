@@ -1,0 +1,37 @@
+:root {
+  /* Brand Colors */
+  --color-primary:  #1a4fcc; /* Deep blue used in headers, buttons */
+  --color-accent: #3abf8c;  /* Light teal/green from 'one tap away' */
+  --color-text-dark: #1e293b;
+  --color-text-muted: #64748b;
+  --color-bg-light: #f8fafc;
+  --color-bg-dark-section: #0a1128; /* Footer background */
+
+  /* Component Colors (Dropdown) */
+  --color-dropdown-bg: #e5effd;
+  --color-dropdown-text: #1a4fcc;
+  --color-icon-login: #ff8e1a; /* Orange for 'Log in' icon */
+  --color-icon-signup: #56d3a8; /* Teal for 'Sign up' icon */
+  
+  /* Typography */
+  --font-family-base: 'Inter', sans-serif;
+}
+.bg-light-section {
+  background-color: #f4f7fe;
+}
+
+.step-card {
+  border: none;
+  min-height: 130px;
+  
+}
+ .step-card:hover{
+  transform: translateY(-1px);
+    transition: transform 0.2s ease;
+  box-shadow: 0 1px 8px var(--color-primary)!important;
+ }
+.step-icon-box {
+  background-color: #1132a1;
+  width: 48px;
+  height: 48px;
+}

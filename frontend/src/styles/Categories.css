@@ -1,0 +1,106 @@
+:root {
+  /* Brand Colors */
+  --color-primary:  #1a4fcc; /* Deep blue used in headers, buttons */
+  --color-accent: #3abf8c;  /* Light teal/green from 'one tap away' */
+  --color-text-dark: #1e293b;
+  --color-text-muted: #64748b;
+  --color-bg-light: #f8fafc;
+  --color-bg-dark-section: #0a1128; /* Footer background */
+
+  /* Component Colors (Dropdown) */
+  --color-dropdown-bg: #e5effd;
+  --color-dropdown-text: #1a4fcc;
+  --color-icon-login: #ff8e1a; /* Orange for 'Log in' icon */
+  --color-icon-signup: #56d3a8; /* Teal for 'Sign up' icon */
+  
+  /* Typography */
+  --font-family-base: 'Inter', sans-serif;
+}
+/* Custom class targets for the scroll container views */
+.categories-wrapper {
+  scroll-behavior: smooth;
+  display: flex;
+  gap: 16px; /* Explicit gap between items */
+  
+  /* Hides default native horizontal browser desktop scroll bars */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.categories-wrapper::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+.categories-section {
+  max-width: 1550px; 
+  margin: 0 auto; /* Keeps it perfectly centered on wide monitors */
+}
+.display{
+transform:translateX(80px)!important;
+}
+.category-card {
+  /* Desktop View Default: Calculates width dynamically to fit exactly 7 cards */
+  flex: 0 0 calc((100% - (6 * 16px)) / 7); 
+  min-width: 120px;
+  height: 140px;
+  border-radius: 18px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+}
+
+.cat-arrow {
+  background-color: #fff;
+  border: 1px solid #e2e8f0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1a202c;
+  transition: all 0.2s ease;
+  z-index: 5;
+}
+
+.cat-arrow:hover {
+  background-color: #f8fafc;
+  color: #1132a1;
+}
+
+/* RESPONSIVE OVERRIDES: Tablet and Mobile Viewports */
+@media (max-width: 991.98px) {
+  /* Allow native swipe scrolling on mobile devices instead of absolute hiding */
+  .categories-wrapper {
+    overflow-x: auto !important;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  /* Show exactly 4 cards on tablets */
+  .category-card {
+    flex: 0 0 calc((100% - (3 * 16px)) / 4);
+  }
+
+  /* Hide navigation arrows on tablet/mobile views since swiping is native */
+  .cat-arrow {
+    display: none !important;
+  }
+  .display{
+transform:translateX(-20px)!important;
+}
+}
+
+@media (max-width: 575.98px) {
+  /* Show exactly 2.5 cards on mobile screens so the user knows they can swipe left or right */
+  .category-card {
+    flex: 0 0 calc((100% - (2 * 16px)) / 2.5);
+  }
+.display{
+transform:translateX(-20px)!important;
+}
+}

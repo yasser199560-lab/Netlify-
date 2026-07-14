@@ -1,0 +1,131 @@
+:root {
+  /* Brand Colors */
+  --color-primary:  #1a4fcc; /* Deep blue used in headers, buttons */
+  --color-accent: #3abf8c;  /* Light teal/green from 'one tap away' */
+  --color-text-dark: #1e293b;
+  --color-text-muted: #64748b;
+  --color-bg-light: #f8fafc;
+  --color-bg-dark-section: #0a1128; /* Footer background */
+
+  /* Component Colors (Dropdown) */
+  --color-dropdown-bg: #e5effd;
+  --color-dropdown-text: #1a4fcc;
+  --color-icon-login: #ff8e1a; /* Orange for 'Log in' icon */
+  --color-icon-signup: #56d3a8; /* Teal for 'Sign up' icon */
+  
+  /* Typography */
+  --font-family-base: 'Inter', sans-serif;
+}
+.hero-section {
+  background: linear-gradient(135deg, #1132a1 0%, #0d216b 100%);
+  height: 60vh;
+  padding-top: 80px; 
+  overflow: hidden;
+}
+
+.text-accent {
+  color: var(--color-accent, #22c55e);
+}
+
+/* 1. Refined wrapper constraints */
+.hero-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 480px; /* Aligns with clean viewport spacing */
+  display: flex;
+  justify-content: flex-end; 
+  align-items: center;
+}
+
+/* 2. Unified Style settings for all carousel images */
+.hero-basket-img {
+  width: 580px; /* Precise visual sizing */
+  height: 420px;
+  
+  /* CHANGED: 'cover' makes wide photos like the clothes section fill the frame beautifully */
+  object-fit: cover; 
+  
+  /* Adds a premium card look to regular photo assets to match your UI layout */
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+  
+  position: absolute;
+  right: -180px; /* Keeps images naturally tracked to the container right boundary edge */
+  top: 43%;
+  transform: translateY(-50%) scale(0.95);
+  
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 3. Smooth active transition display state */
+.hero-basket-img.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%) scale(1);
+  z-index: 2;
+}
+
+/* --- Navigation Controls Layout Styles --- */
+.carousel-indicators-custom .dot {
+  width: 10px;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-indicators-custom .dot.active {
+  background-color: #fff;
+  width: 24px;
+  border-radius: 10px;
+}
+.textt{
+  margin-top:-49px!important;
+}
+.slider-arrow {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s, transform 0.2s;
+  z-index: 10;
+}
+
+.slider-arrow:hover {
+  background: rgba(255, 255, 255, 0.4);
+  transform: translateY(-50%) scale(1.05);
+}
+
+/* ---- Responsive: the hero image column is already hidden below `lg`
+   (d-none d-lg-block), so on phones/tablets let the section size itself
+   to its text content instead of a fixed viewport-height box. ---- */
+@media (max-width: 991.98px) {
+  .hero-section {
+    height: auto;
+    min-height: 60vh;
+    padding-top: 100px;
+    padding-bottom: 48px;
+  }
+
+  .textt {
+    margin-top: 0 !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .hero-section {
+    padding-top: 88px;
+    padding-bottom: 36px;
+  }
+}

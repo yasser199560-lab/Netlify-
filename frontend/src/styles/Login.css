@@ -1,0 +1,301 @@
+.login-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(58, 191, 140, 0.18), transparent 34rem),
+   linear-gradient(150deg, #fcfafa 0%, #97b3c6 52%, #648094 100%);
+  color: #16213f;
+}
+
+.login-card {
+  width: 100%;
+  border: 1px solid #d9e6f7;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 24px 70px rgba(22, 33, 63, 0.12);
+  padding: clamp(1.25rem, 4vw, 2.25rem);
+}
+ .btn-login{
+  background-color: #3c72f0 !important;
+  color:white !important;
+ }
+.auth-home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #3c72f0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  margin-bottom: 1.25rem;
+}
+
+.auth-home-link:hover {
+  color: #123a99;
+}
+
+.auth-logo {
+  width: min(8.25rem, 38vw);
+  height: auto;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.auth-kicker {
+  color: #3abf8c;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.auth-title {
+  color: #132449;
+  font-size: clamp(2rem, 8vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.auth-subtitle {
+  color: #64748b;
+  font-size: 1rem;
+}
+
+.auth-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.auth-label {
+  color: #51647f;
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+}
+
+.auth-input {
+  min-height: 3.25rem;
+  border: 1px solid #cddcf1;
+  border-radius: 8px;
+  color: #16213f;
+  font-size: 1rem;
+}
+
+.auth-input:focus {
+  border-color: #1a4fcc;
+  box-shadow: 0 0 0 0.22rem rgba(26, 79, 204, 0.13);
+}
+:root {
+  /* Brand Colors */
+  --color-primary:  #1a4fcc; /* Deep blue used in headers, buttons */
+  --color-accent: #3abf8c;  /* Light teal/green from 'one tap away' */
+  --color-text-dark: #1e293b;
+  --color-text-muted: #64748b;
+  --color-bg-light: #f8fafc;
+  --color-bg-dark-section: #0a1128; /* Footer background */
+
+  /* Component Colors (Dropdown) */
+  --color-dropdown-bg: #e5effd;
+  --color-dropdown-text: #1a4fcc;
+  --color-icon-login: #ff8e1a; /* Orange for 'Log in' icon */
+  --color-icon-signup: #56d3a8; /* Teal for 'Sign up' icon */
+  
+  /* Typography */
+  --font-family-base: 'Inter', sans-serif;
+}
+.role-tab {
+  width: 100%;
+  min-height: 5rem;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  border: 1px solid #d7e2f2;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #51647f;
+  font-size: clamp(0.76rem, 2.8vw, 0.92rem);
+  font-weight: 800;
+}
+
+.role-tab i {
+  font-size: 1.35rem;
+}
+
+.role-tab.active {
+  border-color: #1a4fcc;
+  background: #edf4ff;
+  color: #1a4fcc;
+}
+
+.auth-text-button {
+  border: 0;
+  background: transparent;
+  color: #3c72f0;
+  font-size: 0.84rem;
+  font-weight: 700;
+  padding: 0 0 0.4rem;
+}
+
+.auth-text-button:hover {
+  color: #123a99;
+  text-decoration: underline;
+}
+
+.auth-primary-btn {
+  min-height: 3.25rem;
+  border: 0;
+  border-radius: 8px;
+  background: #1a4fcc;
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.auth-primary-btn:hover,
+.auth-primary-btn:focus {
+  background: #123a99;
+  color: #ffffff;
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: #7f98bd;
+  font-size: 0.84rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #d9e6f7;
+}
+
+.auth-google-btn {
+  min-height: 3.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  border: 1px solid #cddcf1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #16213f;
+  font-weight: 800;
+}
+
+.auth-google-btn i {
+  color: #3c72f0;
+  font-size: 1.15rem;
+}
+
+.auth-google-btn:hover,
+.auth-google-btn:focus {
+  border-color: #1a4fcc;
+  background: #f8fbff;
+  color: #123a99;
+}
+
+.auth-switch,
+.auth-secondary-link {
+  color: #64748b;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.auth-switch a,
+.auth-secondary-link a {
+  color: #3c72f0 !important;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.auth-switch a:hover,
+.auth-secondary-link a:hover {
+  text-decoration: underline;
+}
+
+.auth-action-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.auth-outline-btn {
+  min-height: 3.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #cddcf1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #3c72f0;
+  font-weight: 800;
+  text-align: center;
+  text-decoration: none;
+}
+
+.auth-outline-btn:hover,
+.auth-outline-btn:focus {
+  border-color: #1a4fcc;
+  background: #edf4ff;
+  color: #123a99;
+}
+
+.auth-choice-btn {
+  width: 100%;
+  text-decoration: none;
+}
+
+.auth-success-icon {
+  width: 4.5rem;
+  height: 4.5rem;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 1.25rem;
+  border-radius: 50%;
+  background: rgba(58, 191, 140, 0.13);
+  color: #3abf8c;
+  font-size: 2.4rem;
+}
+
+.auth-dev-link {
+  border: 1px solid #d9e6f7;
+  border-radius: 8px;
+  background: #f8fbff;
+  color: #64748b;
+  font-size: 0.9rem;
+  padding: 0.85rem;
+  text-align: center;
+}
+
+.auth-dev-link a {
+  color: #3c72f0;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.auth-dev-link a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 575.98px) {
+  .login-card {
+    box-shadow: 0 16px 44px rgba(22, 33, 63, 0.1);
+  }
+
+  .role-tab {
+    min-height: 4.5rem;
+    padding: 0.5rem 0.25rem;
+  }
+
+  .auth-action-row {
+    grid-template-columns: 1fr;
+  }
+}
