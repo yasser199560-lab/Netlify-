@@ -42,6 +42,40 @@
   letter-spacing: 0.5px;
 }
 
+.admin-avatar-sm,
+.admin-avatar-lg {
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.admin-avatar-sm {
+  width: 2rem;
+  height: 2rem;
+}
+
+.admin-avatar-lg {
+  width: 4.5rem;
+  height: 4.5rem;
+}
+
+.admin-avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #3b6ef6;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.admin-avatar-sm.admin-avatar-fallback {
+  font-size: 0.9rem;
+}
+
+.admin-avatar-lg.admin-avatar-fallback {
+  font-size: 1.5rem;
+}
+
 /* ---- Responsive: collapse the fixed sidebar into a horizontal top bar
    on tablets/phones so the dashboard never overflows or gets cramped. ---- */
 @media (max-width: 991.98px) {

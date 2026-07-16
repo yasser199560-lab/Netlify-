@@ -32,9 +32,10 @@ export interface OrderItem {
 
 export interface Order {
   _id: string;
-  // Populated with { _id, name } on the partner order list (getPartnerOrders);
-  // still a plain id string anywhere else the Order type is used.
-  customerId: string | { _id: string; name: string };
+  // Populated with { _id, name, email } on the partner order list
+  // (getPartnerOrders); still a plain id string anywhere else the Order
+  // type is used.
+  customerId: string | { _id: string; name: string; email?: string };
   partnerId: string;
   items: OrderItem[];
   totalAmount: number;

@@ -5,7 +5,16 @@ import {
   AdminOrder,
   DashboardStats,
   DashboardOverview,
+  OrderStatusFilter,
+  DateFilter,
 } from '../types/admin.types';
+
+export interface OrderQueryParams {
+  status?: OrderStatusFilter;
+  dateFilter?: DateFilter;
+  startDate?: string;
+  endDate?: string;
+}
 
 export const adminApi = {
   getStats: async (): Promise<DashboardStats> => (await api.get('/admin/stats')).data.data,
@@ -22,5 +31,14 @@ export const adminApi = {
   deletePartner: async (id: string | number) => (await api.delete(`/admin/partners/${id}`)).data,
   approvePartner: async (userId: string | number) => (await api.patch(`/admin/partners/${userId}/approve`)).data,
 
-  getOrders: async (): Promise<AdminOrder[]> => (await api.get('/admin/orders')).data.data,
+  getOrders: async (params?: OrderQueryParams): Promise<AdminOrder[]> => {
+    const query: Record<string, string> = {};
+    if (params?.status && params.status !== 'all') query.status = params.status;
+    if (params?.dateFilter && params.dateFilter !== 'all') query.dateFilter = params.dateFilter;
+    if (params?.dateFilter === 'custom') {
+      if (params.startDate) query.startDate = params.startDate;
+      if (params.endDate) query.endDate = params.endDate;
+    }
+    return (await api.get('/admin/orders', { params: query })).data.data;
+  },
 };
