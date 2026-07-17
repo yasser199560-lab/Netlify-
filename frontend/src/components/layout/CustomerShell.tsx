@@ -1,8 +1,9 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
 import logoImg from "../../assets/logoo.png";
+import "../../styles/Shell.css";
 
 const navItems = [
   { label: "Dashboard", to: "/dashboard", icon: "ti-home" },
@@ -40,15 +41,23 @@ function CartGlyph({ size = 18 }: { size?: number }) {
 // Light sidebar shell for the customer-facing dashboard — distinct from
 // the dark DashboardShell used by admin/partner panels, matching the
 // customer dashboard mockup (white sidebar, light-blue active state).
+//
+// Below `md` the sidebar becomes an off-canvas drawer opened with a
+// hamburger button in the header, instead of a fixed-width column that
+// used to permanently eat ~240px of a phone's viewport.
 export default function CustomerShell({ children }: { children: ReactNode }) {
   const { user, logout } = useAuth();
   const { cart } = useCart();
   const cartCount = cart?.items.reduce((sum, i) => sum + i.quantity, 0) ?? 0;
+  const [navOpen, setNavOpen] = useState(false);
+  const closeNav = () => setNavOpen(false);
 
   return (
-    <div className="d-flex min-vh-100 bg-surface">
-      <aside className="d-flex flex-shrink-0 flex-column border-end bg-white px-3 py-4" style={{ width: "15rem" }}>
-        <Link to="/" className="d-flex align-items-center gap-2 px-2 mb-4 text-decoration-none" aria-label="Talabaty home">
+    <div className="d-flex min-vh-100 bg-surface shell-root">
+      {navOpen && <div className="shell-overlay d-md-none" onClick={closeNav} aria-hidden="true" />}
+
+      <aside className={`shell-sidebar d-flex flex-shrink-0 flex-column border-end bg-white px-3 py-4 ${navOpen ? "shell-sidebar-open" : ""}`} style={{ width: "15rem" }}>
+        <Link to="/" className="d-flex align-items-center gap-2 px-2 mb-4 text-decoration-none" aria-label="Talabaty home" onClick={closeNav}>
           <img src={logoImg} alt="Talabaty" style={{ height: "2.25rem", width: "auto" }} />
           <span className="fw-bold text-navy-900">Talabaty</span>
         </Link>
@@ -58,6 +67,7 @@ export default function CustomerShell({ children }: { children: ReactNode }) {
             <NavLink
               key={item.to}
               to={item.to}
+              onClick={closeNav}
               className={({ isActive }) =>
                 `d-flex align-items-center gap-2 rounded-3 px-3 py-2 text-decoration-none small fw-medium ${
                   isActive ? "bg-brand-50 text-brand-600" : "text-slate-500 hover-bg-slate-50"
@@ -84,38 +94,49 @@ export default function CustomerShell({ children }: { children: ReactNode }) {
         </button>
       </aside>
 
-      <div className="flex-grow-1">
-        <header className="d-flex align-items-center justify-content-end gap-3 border-bottom bg-white px-4 py-2">
-          <button className="btn d-flex align-items-center justify-content-center rounded-3 text-slate-400 border-0" style={{ width: "2.25rem", height: "2.25rem" }} aria-label="Search">
-            <i className="ti ti-search" aria-hidden="true" />
-          </button>
-          <NavLink
-            to="/cart"
-            className="btn position-relative d-flex align-items-center justify-content-center rounded-3 text-slate-400 border-0"
+      <div className="flex-grow-1 shell-content">
+        <header className="d-flex align-items-center justify-content-between gap-2 border-bottom bg-white px-3 px-md-4 py-2">
+          <button
+            className="btn d-flex d-md-none align-items-center justify-content-center rounded-3 text-slate-500 border-0"
             style={{ width: "2.25rem", height: "2.25rem" }}
-            aria-label="Cart"
+            onClick={() => setNavOpen(true)}
+            aria-label="Open menu"
           >
-            <CartGlyph size={20} />
-            {cartCount > 0 && (
-              <span
-                className="badge rounded-pill bg-brand-600 text-white position-absolute"
-                style={{ fontSize: ".6rem", top: "0", right: "0" }}
-              >
-                {cartCount}
+            <i className="ti ti-menu-2" aria-hidden="true" />
+          </button>
+
+          <div className="d-flex align-items-center gap-2 gap-md-3 ms-auto">
+            <button className="btn d-flex align-items-center justify-content-center rounded-3 text-slate-400 border-0" style={{ width: "2.25rem", height: "2.25rem" }} aria-label="Search">
+              <i className="ti ti-search" aria-hidden="true" />
+            </button>
+            <NavLink
+              to="/cart"
+              className="btn position-relative d-flex align-items-center justify-content-center rounded-3 text-slate-400 border-0"
+              style={{ width: "2.25rem", height: "2.25rem" }}
+              aria-label="Cart"
+            >
+              <CartGlyph size={20} />
+              {cartCount > 0 && (
+                <span
+                  className="badge rounded-pill bg-brand-600 text-white position-absolute"
+                  style={{ fontSize: ".6rem", top: "0", right: "0" }}
+                >
+                  {cartCount}
+                </span>
+              )}
+            </NavLink>
+            <div className="d-flex align-items-center gap-2">
+              <span className="d-flex align-items-center justify-content-center rounded-circle bg-brand-100 fw-bold text-brand-600 flex-shrink-0" style={{ width: "2rem", height: "2rem" }}>
+                {user?.name?.[0] ?? "U"}
               </span>
-            )}
-          </NavLink>
-          <div className="d-flex align-items-center gap-2">
-            <span className="d-flex align-items-center justify-content-center rounded-circle bg-brand-100 fw-bold text-brand-600" style={{ width: "2rem", height: "2rem" }}>
-              {user?.name?.[0] ?? "U"}
-            </span>
-            <div className="small lh-sm">
-              <p className="fw-semibold text-navy-900 mb-0">{user?.name}</p>
-              <p className="text-slate-400 mb-0" style={{ fontSize: ".75rem" }}>Customer</p>
+              <div className="small lh-sm d-none d-sm-block">
+                <p className="fw-semibold text-navy-900 mb-0">{user?.name}</p>
+                <p className="text-slate-400 mb-0" style={{ fontSize: ".75rem" }}>Customer</p>
+              </div>
             </div>
           </div>
         </header>
-        <main className="px-4 py-4">{children}</main>
+        <main className="px-3 px-md-4 py-4">{children}</main>
       </div>
     </div>
   );

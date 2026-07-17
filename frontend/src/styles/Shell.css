@@ -1,0 +1,48 @@
+/* Shared responsive behavior for the account-area sidebars
+   (CustomerShell.tsx and DashboardShell.tsx).
+
+   Desktop/tablet (>=768px): sidebar sits in the flex row exactly as
+   before, fixed width, always visible.
+
+   Phone (<768px): the sidebar becomes a fixed off-canvas drawer that
+   slides in from the left over a dimmed backdrop, opened via a
+   hamburger button, instead of permanently taking ~240-256px away
+   from a ~390px-wide screen. */
+
+.shell-root {
+  overflow-x: hidden;
+}
+
+.shell-sidebar {
+  transition: transform 0.25s ease-in-out;
+}
+
+.shell-content {
+  min-width: 0; /* allow flex child to shrink instead of overflowing */
+}
+
+@media (max-width: 767.98px) {
+  .shell-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    max-width: 82vw;
+    transform: translateX(-100%);
+    z-index: 1050;
+    overflow-y: auto;
+  }
+
+  .shell-sidebar.shell-sidebar-open {
+    transform: translateX(0);
+    box-shadow: 8px 0 24px rgba(15, 23, 42, 0.25);
+  }
+
+  .shell-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.45);
+    z-index: 1040;
+    border: none;
+  }
+}

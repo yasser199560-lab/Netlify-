@@ -29,6 +29,7 @@ const ACCEPTED_AVATAR_TYPES = ['image/png', 'image/jpeg', 'image/webp'];
 const AdminDashboard: React.FC = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<ActiveTab>('dashboard');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -321,8 +322,12 @@ const AdminDashboard: React.FC = () => {
 
   return (
     <div className="d-flex admin-dashboard-wrapper">
+      {sidebarOpen && (
+        <div className="admin-sidebar-overlay d-lg-none" onClick={() => setSidebarOpen(false)} aria-hidden="true" />
+      )}
+
       {/* Sidebar */}
-      <aside className="admin-sidebar d-flex flex-column p-3">
+      <aside className={`admin-sidebar d-flex flex-column p-3 ${sidebarOpen ? 'admin-sidebar-open' : ''}`}>
         <div className="d-flex align-items-center gap-2 px-2 pb-4">
           <i className="bi bi-globe2 fs-4 text-primary"></i>
           <div>
@@ -338,7 +343,10 @@ const AdminDashboard: React.FC = () => {
               className={`btn text-start d-flex align-items-center gap-2 rounded-3 py-2 px-3 nav-item-btn ${
                 activeTab === item.key ? 'active-nav-item' : 'text-light'
               }`}
-              onClick={() => setActiveTab(item.key)}
+              onClick={() => {
+                setActiveTab(item.key);
+                setSidebarOpen(false);
+              }}
             >
               <i className={`bi ${item.icon}`}></i>
               {item.label}
@@ -368,8 +376,19 @@ const AdminDashboard: React.FC = () => {
       </aside>
 
       {/* Main content */}
-      <main className="flex-grow-1 p-4 admin-main-content position-relative">
-        <div className="mb-4">
+      <main className="flex-grow-1 p-3 p-md-4 admin-main-content position-relative">
+        <div className="d-flex d-lg-none align-items-center gap-2 mb-3">
+          <button
+            className="btn admin-hamburger-btn d-flex align-items-center justify-content-center rounded-3"
+            onClick={() => setSidebarOpen(true)}
+            aria-label="Open menu"
+          >
+            <i className="bi bi-list fs-4"></i>
+          </button>
+          <span className="fw-semibold text-dark">{currentTabLabel}</span>
+        </div>
+
+        <div className="mb-4 d-none d-lg-block">
           <h1 className="h3 fw-bold text-dark mb-1">{currentTabLabel}</h1>
           <p className="text-muted mb-0">Welcome back{me?.name ? `, ${me.name}` : ', Admin'}</p>
         </div>

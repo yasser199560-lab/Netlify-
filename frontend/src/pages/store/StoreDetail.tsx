@@ -28,19 +28,42 @@ export default function StoreDetail() {
 
   return (
     <div className="min-vh-100 bg-surface">
-      <header className="d-flex align-items-center gap-3 border-bottom bg-white px-4 px-md-5 py-2">
-        <Link to="/" className="d-flex align-items-center gap-2 text-decoration-none flex-shrink-0" aria-label="Talabaty home">
-          <img src={logoImg} alt="Talabaty" style={{ height: "2.25rem", width: "auto" }} />
-          <span className="fw-bold text-navy-900">Talabaty</span>
-        </Link>
-        <Link
-          to="/dashboard"
-          className="btn rounded-3 border border-slate-200 text-slate-600 fw-semibold hover-bg-slate-50 d-flex align-items-center gap-2 flex-shrink-0"
-        >
-          <i className="ti ti-arrow-left" aria-hidden="true" />
-          Back to dashboard
-        </Link>
-        <div className="position-relative flex-grow-1" style={{ maxWidth: "36rem" }}>
+      <header className="border-bottom bg-white px-3 px-md-5 py-2">
+        <div className="d-flex align-items-center justify-content-between gap-2">
+          <div className="d-flex align-items-center gap-2 gap-md-3 flex-shrink-0">
+            <Link to="/" className="d-flex align-items-center gap-2 text-decoration-none" aria-label="Talabaty home">
+              <img src={logoImg} alt="Talabaty" style={{ height: "2.25rem", width: "auto" }} />
+              <span className="fw-bold text-navy-900 d-none d-sm-inline">Talabaty</span>
+            </Link>
+            <Link
+              to="/dashboard"
+              className="btn rounded-3 border border-slate-200 text-slate-600 fw-semibold hover-bg-slate-50 d-flex align-items-center gap-2"
+              aria-label="Back to dashboard"
+            >
+              <i className="ti ti-arrow-left" aria-hidden="true" />
+              <span className="d-none d-lg-inline">Back to dashboard</span>
+            </Link>
+          </div>
+
+          <div className="position-relative flex-grow-1 d-none d-md-block mx-md-3" style={{ maxWidth: "36rem" }}>
+            <i className="ti ti-search position-absolute text-slate-400" style={{ left: ".75rem", top: "50%", transform: "translateY(-50%)" }} aria-hidden="true" />
+            <input
+              className="form-control bg-surface ps-5"
+              placeholder={`Search in ${store?.storeName ?? "this store"}...`}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+
+          <Link to="/cart" className="btn rounded-3 bg-brand-50 text-brand-700 fw-semibold hover-bg-brand-100 d-flex align-items-center gap-2 flex-shrink-0">
+            <i className="ti ti-shopping-cart" aria-hidden="true" />
+            <span className="d-none d-lg-inline">Cart</span> ({cartCount})
+          </Link>
+        </div>
+
+        {/* Search drops to its own full-width row below `md` instead of
+            getting squeezed to nothing next to the buttons. */}
+        <div className="position-relative mt-2 d-md-none">
           <i className="ti ti-search position-absolute text-slate-400" style={{ left: ".75rem", top: "50%", transform: "translateY(-50%)" }} aria-hidden="true" />
           <input
             className="form-control bg-surface ps-5"
@@ -49,10 +72,6 @@ export default function StoreDetail() {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        <Link to="/cart" className="btn rounded-3 bg-brand-50 text-brand-700 fw-semibold hover-bg-brand-100 d-flex align-items-center gap-2 flex-shrink-0">
-          <i className="ti ti-shopping-cart" aria-hidden="true" />
-          Cart ({cartCount})
-        </Link>
       </header>
 
       <div className="position-relative overflow-hidden text-white" style={{ height: "9rem" }}>
