@@ -50,7 +50,7 @@
 /* Sidebar-toggle hamburger button — same look as the admin panel's
    toggle (white background, light border, black icon). */
 .shell-hamburger-btn {
-  background-color: #000000;
+  background-color: #fff;
   border: 1px solid #e2e8f0;
-  color: #ffffff;
+  color: #000000;
 }
