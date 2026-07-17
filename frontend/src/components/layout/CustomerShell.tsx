@@ -97,7 +97,7 @@ export default function CustomerShell({ children }: { children: ReactNode }) {
       <div className="flex-grow-1 shell-content">
         <header className="d-flex align-items-center justify-content-between gap-2 border-bottom bg-white px-3 px-md-4 py-2">
           <button
-            className="btn d-flex d-md-none align-items-center justify-content-center rounded-3 text-black border-0"
+            className="btn d-flex d-md-none align-items-center justify-content-center rounded-3 shell-hamburger-btn"
             style={{ width: "2.25rem", height: "2.25rem" }}
             onClick={() => setNavOpen(true)}
             aria-label="Open menu"
