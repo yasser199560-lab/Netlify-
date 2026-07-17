@@ -27,35 +27,40 @@
   color: var(--color-accent, #22c55e);
 }
 
-/* 1. Refined wrapper constraints */
+/* 1. Refined wrapper constraints
+   Mobile-first: a simple, fully-contained box sized off the viewport
+   width so nothing overflows or gets clipped on small phones. */
 .hero-image-wrapper {
   position: relative;
   width: 100%;
-  height: 480px; /* Aligns with clean viewport spacing */
+  max-width: 420px;
+  height: 62vw;       /* scales with screen width on phones */
+  max-height: 320px;
+  margin: 28px auto 0; /* centered under the text on mobile */
   display: flex;
-  justify-content: flex-end; 
+  justify-content: center;
   align-items: center;
 }
 
 /* 2. Unified Style settings for all carousel images */
 .hero-basket-img {
-  width: 580px; /* Precise visual sizing */
-  height: 420px;
-  
-  /* CHANGED: 'cover' makes wide photos like the clothes section fill the frame beautifully */
-  object-fit: cover; 
-  
+  width: 100%;
+  height: 100%;
+
+  /* 'cover' makes wide photos like the clothes section fill the frame beautifully */
+  object-fit: cover;
+
   /* Adds a premium card look to regular photo assets to match your UI layout */
-  border-radius: 24px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-  
+  border-radius: 20px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+
   transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
-  
+
   position: absolute;
-  right: -180px; /* Keeps images naturally tracked to the container right boundary edge */
-  top: 43%;
-  transform: translateY(-50%) scale(0.95);
-  
+  left: 0;
+  top: 0;
+  transform: scale(0.96);
+
   opacity: 0;
   pointer-events: none;
   z-index: 1;
@@ -65,8 +70,36 @@
 .hero-basket-img.active {
   opacity: 1;
   pointer-events: auto;
-  transform: translateY(-50%) scale(1);
+  transform: scale(1);
   z-index: 2;
+}
+
+/* ---- Desktop: restore the larger, right-offset showcase image once
+   there's enough room for the two-column layout (matches d-lg-block). ---- */
+@media (min-width: 992px) {
+  .hero-image-wrapper {
+    max-width: none;
+    width: 100%;
+    height: 480px;
+    max-height: none;
+    margin: 0;
+    justify-content: flex-end;
+  }
+
+  .hero-basket-img {
+    width: 580px;
+    height: 420px;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    left: auto;
+    right: -180px;
+    top: 43%;
+    transform: translateY(-50%) scale(0.95);
+  }
+
+  .hero-basket-img.active {
+    transform: translateY(-50%) scale(1);
+  }
 }
 
 /* --- Navigation Controls Layout Styles --- */
@@ -107,25 +140,66 @@
   transform: translateY(-50%) scale(1.05);
 }
 
-/* ---- Responsive: the hero image column is already hidden below `lg`
-   (d-none d-lg-block), so on phones/tablets let the section size itself
-   to its text content instead of a fixed viewport-height box. ---- */
+/* ---- Responsive: the carousel image now shows on every screen size, so
+   phones/tablets let the section size itself to its content (text + image)
+   instead of a fixed viewport-height box. ---- */
 @media (max-width: 991.98px) {
   .hero-section {
     height: auto;
-    min-height: 60vh;
+    min-height: 0;
     padding-top: 100px;
-    padding-bottom: 48px;
+    padding-bottom: 88px; /* leaves room for the arrows/dots below the image */
   }
 
   .textt {
     margin-top: 0 !important;
+    text-align: center;
+  }
+
+  .textt .d-flex {
+    justify-content: center;
   }
 }
 
 @media (max-width: 575.98px) {
   .hero-section {
     padding-top: 88px;
-    padding-bottom: 36px;
+    padding-bottom: 76px;
+  }
+
+  .hero-image-wrapper {
+    height: 68vw;
+  }
+}
+
+/* Keep the prev/next arrows clear of the image card on phones/tablets by
+   anchoring them under the carousel instead of vertically centered over it. */
+@media (max-width: 991.98px) {
+  .slider-arrow {
+    top: auto;
+    bottom: 8px;
+    transform: none;
+    width: 38px;
+    height: 38px;
+  }
+
+  .slider-arrow:hover {
+    transform: scale(1.05);
+  }
+
+  .slider-arrow.prev {
+    left: 50%;
+    right: auto;
+    margin-left: -60px;
+  }
+
+  .slider-arrow.next {
+    right: 50%;
+    left: auto;
+    margin-right: -60px;
+  }
+
+  .carousel-indicators-custom {
+    bottom: 16px;
   }
 }

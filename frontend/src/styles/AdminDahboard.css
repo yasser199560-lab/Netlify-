@@ -11,6 +11,25 @@
   background-color: #0f1b3d;
 }
 
+/* On phones/tablets there isn't room for a fixed 260px sidebar beside the
+   content, so stack it on top and let it take the full width instead of
+   pushing the dashboard into horizontal overflow. */
+@media (max-width: 767.98px) {
+  .admin-dashboard-wrapper {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .admin-main-content {
+    min-height: auto;
+    padding: 1rem !important;
+  }
+}
+
 .nav-item-btn {
   background-color: transparent;
   border: none;

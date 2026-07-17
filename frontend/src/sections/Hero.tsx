@@ -59,9 +59,8 @@ const Hero: React.FC = () => {
             </div>
           </div>
           
-          {/* Right Column: Dynamic image transitions */}
-         {/* Right Column: Dynamic image transitions */}
-<div className="col-lg-6 d-none d-lg-block">
+          {/* Right Column: Dynamic image transitions (visible on every screen size) */}
+<div className="col-12 col-lg-6">
   <div className="hero-image-wrapper">
     {heroImages.map((imgUrl, idx) => (
       <img 
