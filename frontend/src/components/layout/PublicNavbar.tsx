@@ -54,7 +54,7 @@ export default function PublicNavbar() {
           )}
 
           <button
-            className="btn d-flex d-md-none align-items-center justify-content-center rounded-3 border-0 text-slate-600"
+            className="btn d-flex d-md-none align-items-center justify-content-center rounded-3 border-0 public-navbar-hamburger-btn"
             style={{ width: "2.25rem", height: "2.25rem" }}
             onClick={() => setMenuOpen((v) => !v)}
             aria-label="Open menu"

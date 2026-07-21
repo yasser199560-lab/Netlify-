@@ -60,9 +60,22 @@
   background: none;
   border: none;
   font-size: 1.8rem;
-  color: #1e293b;
+  color: #000000;
   padding: 0;
   z-index: 1040;
+}
+
+.hamburger-btn i {
+  color: #000000;
+}
+
+/* Belt-and-braces: guarantee the toggle stays solid black on every phone
+   screen size, regardless of anything else in the cascade. */
+@media (max-width: 991.98px) {
+  .hamburger-btn,
+  .hamburger-btn i {
+    color: #000000 !important;
+  }
 }
 
 /* NEW: Responsive Mobile Slide-down Navigation drawer structural layouts */

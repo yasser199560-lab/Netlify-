@@ -1,5 +1,5 @@
-import { useState, FormEvent } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useState, FormEvent, SyntheticEvent } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../api/axiosInstance";
 import { useAuth } from "../context/AuthContext";
 import { Role } from "../types";
@@ -15,20 +15,19 @@ const roleTabs: { role: Role; label: string; icon: string }[] = [
 export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const resetToken = searchParams.get("token");
 
   const [loginAs, setLoginAs] = useState<Role>("customer");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [authView, setAuthView] = useState<"login" | "forgot" | "reset" | "done">(resetToken ? "reset" : "login");
+  const [authView, setAuthView] = useState<"login" | "forgot" | "otp" | "reset" | "done">("login");
   const [resetEmail, setResetEmail] = useState("");
+  const [otp, setOtp] = useState("");
+  const [resetSessionToken, setResetSessionToken] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [resetMessage, setResetMessage] = useState("");
   const [resetError, setResetError] = useState("");
-  const [devResetUrl, setDevResetUrl] = useState("");
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -45,22 +44,37 @@ export default function Login() {
     setAuthView("login");
     setResetError("");
     setResetMessage("");
-    setDevResetUrl("");
+    setOtp("");
+    setResetSessionToken("");
     navigate("/login");
   };
 
-  const handleForgotSubmit = async (e: FormEvent) => {
+  const handleForgotSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     setResetError("");
     setResetMessage("");
-    setDevResetUrl("");
 
     try {
       const { data } = await api.post("/auth/forgot-password", { email: resetEmail });
-      setResetMessage(data.message || "If an account exists for that email, a reset link will be sent shortly.");
-      setDevResetUrl(data.resetUrl || "");
+      setResetMessage(data.message || "If an account exists for that email, a verification code has been sent to it.");
+      setOtp("");
+      setAuthView("otp");
     } catch (err: any) {
-      setResetError(err.response?.data?.message || "Could not send reset link");
+      setResetError(err.response?.data?.message || "Could not send verification code");
+    }
+  };
+
+  const handleOtpSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setResetError("");
+
+    try {
+      const { data } = await api.post("/auth/verify-reset-otp", { email: resetEmail, otp });
+      setResetSessionToken(data.resetToken);
+      setResetError("");
+      setAuthView("reset");
+    } catch (err: any) {
+      setResetError(err.response?.data?.message || "Could not verify code");
     }
   };
 
@@ -74,10 +88,12 @@ export default function Login() {
     }
 
     try {
-      await api.post("/auth/reset-password", { token: resetToken, password: newPassword });
+      await api.post("/auth/reset-password", { token: resetSessionToken, password: newPassword });
       setAuthView("done");
       setNewPassword("");
       setConfirmPassword("");
+      setOtp("");
+      setResetSessionToken("");
       navigate("/reset-password", { replace: true });
     } catch (err: any) {
       setResetError(err.response?.data?.message || "Could not reset password");
@@ -190,7 +206,7 @@ export default function Login() {
 {/* FORGET PASSWORD FORM TO BE DISPLAYED WHEN CLICKING */}
               {authView === "forgot" && (
                 <>
-                  {renderHeader("Password reset", "Reset your password", "Enter your email and we will send a secure reset link.")}
+                  {renderHeader("Password reset", "Reset your password", "Enter your email and we will send a verification code to it.")}
 
                   <form onSubmit={handleForgotSubmit} className="auth-form">
                     {resetError && (
@@ -220,14 +236,60 @@ export default function Login() {
                     </div>
 
                     <button type="submit" className=" btn-login btn auth-primary-btn w-100">
-                      Send reset link
+                      Send verification code
                     </button>
 
-                    {devResetUrl && (
-                      <p className="auth-dev-link mb-0">
-                        Development reset link: <a href={devResetUrl}>Open link</a>
-                      </p>
+                    <div className="auth-action-row">
+                      <button type="button" className="auth-outline-btn" onClick={showLogin}>
+                        Back to login
+                      </button>
+                      <Link to="/" className="auth-outline-btn">
+                        Back to home
+                      </Link>
+                    </div>
+                  </form>
+                </>
+              )}
+
+              {authView === "otp" && (
+                <>
+                  {renderHeader("Verify it's you", "Enter your verification code", `We sent a 6-digit code to ${resetEmail}. It expires in 10 minutes.`)}
+
+                  <form onSubmit={handleOtpSubmit} className="auth-form">
+                    {resetError && (
+                      <div className="alert alert-danger py-2" role="alert">
+                        {resetError}
+                      </div>
                     )}
+
+                    <div>
+                      <label htmlFor="reset-otp" className="form-label auth-label">
+                        Verification code
+                      </label>
+                      <input
+                        id="reset-otp"
+                        type="text"
+                        inputMode="numeric"
+                        autoComplete="one-time-code"
+                        maxLength={6}
+                        className="form-control auth-input auth-otp-input"
+                        placeholder="000000"
+                        value={otp}
+                        onChange={(e) => setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                        required
+                      />
+                    </div>
+
+                    <button type="submit" className=" btn-login btn auth-primary-btn w-100" disabled={otp.length !== 6}>
+                      Verify code
+                    </button>
+
+                    <p className="auth-dev-link mb-0">
+                      Didn't get it?{" "}
+                      <button type="button" className="auth-text-button p-0" onClick={handleForgotSubmit}>
+                        Resend code
+                      </button>
+                    </p>
 
                     <div className="auth-action-row">
                       <button type="button" className="auth-outline-btn" onClick={showLogin}>
@@ -243,7 +305,7 @@ export default function Login() {
 
               {authView === "reset" && (
                 <>
-                  {renderHeader("New password", "Choose a new password", "Your reset link is valid for 15 minutes.")}
+                  {renderHeader("New password", "Choose a new password", "Your verification session is valid for 10 minutes.")}
 
                   <form onSubmit={handleResetSubmit} className="auth-form">
                     {resetError && (

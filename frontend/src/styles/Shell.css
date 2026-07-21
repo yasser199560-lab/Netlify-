@@ -54,3 +54,11 @@
   border: 1px solid #e2e8f0;
   color: #000000;
 }
+
+/* Public site navbar's mobile hamburger toggle — forced solid black so
+   it stays visible on every phone screen regardless of anything else
+   in the cascade. */
+.public-navbar-hamburger-btn,
+.public-navbar-hamburger-btn i {
+  color: #000000 !important;
+}
