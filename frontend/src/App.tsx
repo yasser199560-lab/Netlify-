@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AssistantWidget from "./components/AssistantWidget";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -24,6 +25,7 @@ import PartnerSettings from "./pages/partner/PartnerSettings";
 
 export default function App() {
   return (
+    <>
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
@@ -58,5 +60,7 @@ export default function App() {
         <Route path="/admin" element={<AdminDashboard />} />
       </Route>
     </Routes>
+    <AssistantWidget />
+    </>
   );
 }
