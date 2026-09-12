@@ -4,6 +4,7 @@ import api from "../../api/axiosInstance";
 import { Product, PartnerProfile } from "../../types";
 import { productPlaceholder } from "../../utils/image";
 import { partnerNavItems } from "./partnerNav";
+import { generateProductListing } from "../../api/assistantApi";
 
 export default function MyItems() {
   const [profile, setProfile] = useState<PartnerProfile | null>(null);
@@ -12,6 +13,9 @@ export default function MyItems() {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [aiHint, setAiHint] = useState("");
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiError, setAiError] = useState<string | null>(null);
 
   const loadData = () => {
     api.get<PartnerProfile>("/partners/me").then((res) => setProfile(res.data)).catch(() => {});
@@ -34,6 +38,21 @@ export default function MyItems() {
     loadData();
   };
 
+  const handleGenerateWithAi = async () => {
+    if (!aiHint.trim() || aiLoading) return;
+    setAiLoading(true);
+    setAiError(null);
+    try {
+      const listing = await generateProductListing(aiHint.trim());
+      setTitle(listing.title);
+      setDescription(listing.description);
+    } catch {
+      setAiError("Couldn't generate a listing right now. Try rephrasing or fill it in manually.");
+    } finally {
+      setAiLoading(false);
+    }
+  };
+
   const handleDelete = async (id: string) => {
     await api.delete(`/products/${id}`);
     loadData();
@@ -52,6 +71,31 @@ export default function MyItems() {
         <div className="col-lg-4">
           <form onSubmit={handleSubmit} className="rounded-xl2 bg-white p-4 shadow-card">
             <h2 className="mb-3 fw-bold text-navy-900">Add new item</h2>
+
+            <div className="mb-3 rounded-3 bg-brand-50 p-3">
+              <span className="mb-1 d-flex align-items-center gap-1 fw-semibold text-brand-700" style={{ fontSize: ".8rem" }}>
+                <i className="bi bi-stars" aria-hidden="true" />
+                Not sure how to describe it? Let AI write it
+              </span>
+              <div className="d-flex gap-2 mt-2">
+                <input
+                  className="form-control form-control-sm"
+                  placeholder="e.g. grilled chicken plate with rice and garlic sauce"
+                  value={aiHint}
+                  onChange={(e) => setAiHint(e.target.value)}
+                  disabled={aiLoading}
+                />
+                <button
+                  type="button"
+                  className="btn btn-sm btn-brand flex-shrink-0"
+                  onClick={handleGenerateWithAi}
+                  disabled={aiLoading || !aiHint.trim()}
+                >
+                  {aiLoading ? "..." : "Generate"}
+                </button>
+              </div>
+              {aiError && <p className="mt-2 mb-0 text-danger" style={{ fontSize: ".75rem" }}>{aiError}</p>}
+            </div>
 
             <label className="mb-3 d-block">
               <span className="mb-1 d-block small-caps fw-semibold text-slate-500" style={{ fontSize: ".75rem" }}>Image URL</span>
